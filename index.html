@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230d3a5c%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2220%22 text-anchor=%22middle%22 fill=%22%23f1f6f5%22 font-family=%22Georgia,serif%22%3E%26amp;%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="Door AI">
+<meta property="og:description" content="Your local AI experts in Door County, Wisconsin.">
+<title>Door AI</title>
+<meta name="description" content="Practical AI for growing businesses. Based in Door County, Wisconsin, working in person across Northeast Wisconsin and remotely anywhere in the US.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: clean light consultancy page. Cool white ground, deep lake-blue band, green for every action. Big numbered steps, a rolling strip of the tools we work with. */
+:root {
+  --bg: #f4f8f9;          /* cool white */
+  --surface: #ffffff;
+  --ink: #0b2533;         /* deep navy */
+  --muted: #4a6572;
+  --line: #d7e4e9;
+  --bay: #0d3a5c;         /* Lake Michigan blue, used for the dark band */
+  --bay-ink: #eef6fb;
+  --bay-muted: #a9c6d8;
+  --cherry: #0e8a6a;      /* action green (name kept for existing rules) */
+  --blue: #1f6fd1;        /* bright blue for highlights */
+  --glow-a: rgba(31, 111, 209, 0.14);
+  --glow-b: rgba(14, 138, 106, 0.14);
+  --focus: #e8a317;
+  --ok: #0e8a6a;
+  --display: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #07161f; --surface: #0e2230; --ink: #e7f1f6; --muted: #9db6c3; --line: #1d3a4b;
+    --bay: #0b2d47; --bay-ink: #eaf4fa; --bay-muted: #9cc0d6; --cherry: #2fc79c; --blue: #5aa2ff;
+    --glow-a: rgba(90, 162, 255, 0.16); --glow-b: rgba(47, 199, 156, 0.14); --focus: #f3bb45; --ok: #2fc79c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #07161f; --surface: #0e2230; --ink: #e7f1f6; --muted: #9db6c3; --line: #1d3a4b;
+  --bay: #0b2d47; --bay-ink: #eaf4fa; --bay-muted: #9cc0d6; --cherry: #2fc79c; --blue: #5aa2ff;
+  --glow-a: rgba(90, 162, 255, 0.16); --glow-b: rgba(47, 199, 156, 0.14); --focus: #f3bb45; --ok: #2fc79c;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.1; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.6rem, 6.5vw, 4.8rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(2rem, 4vw, 3rem); }
+h3 { font-size: 1.45rem; }
+p { margin: 0; }
+.label { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5em; padding: 0.85em 1.4em; border-radius: 999px; text-decoration: none; border: 2px solid transparent; cursor: pointer; font: inherit; font-weight: 600; }
+.btn-primary { background: var(--cherry); color: #fff; }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-primary:disabled { opacity: 0.6; cursor: progress; }
+.btn-ghost { border-color: currentColor; color: inherit; background: transparent; }
+.btn-sm { padding: 0.5em 1em; font-size: 0.9rem; }
+
+/* Header */
+header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.brand { font-family: var(--display); font-size: 1.35rem; text-decoration: none; white-space: nowrap; }
+.brand span { color: var(--cherry); }
+nav ul { display: flex; flex-wrap: wrap; gap: 4px 22px; list-style: none; margin: 0; padding: 0; font-size: 0.95rem; font-weight: 500; }
+nav a { text-decoration: none; color: var(--muted); }
+nav a:hover { color: var(--ink); }
+.header-cta { display: none; }
+@media (max-width: 760px) { nav { display: none; } .header-cta { display: inline-flex; } }
+
+/* Hero */
+.hero { padding-block: clamp(56px, 9vw, 112px) clamp(48px, 7vw, 88px); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: end; }
+.hero-text { display: grid; gap: 26px; min-width: 0; }
+.hero-text .lead { font-size: clamp(1.1rem, 1.8vw, 1.3rem); color: var(--muted); max-width: 34em; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.coords { display: grid; gap: 18px; border-left: 2px solid var(--line); padding-left: 24px; min-width: 0; }
+.coords p { font-family: var(--mono); font-size: 0.85rem; color: var(--muted); }
+.coords strong { display: block; font-family: var(--display); font-weight: 400; font-size: 1.6rem; color: var(--ink); line-height: 1.2; }
+@media (max-width: 820px) { .hero .wrap { grid-template-columns: 1fr; } }
+
+/* Pain points */
+.pains { padding-block: 0 clamp(56px, 8vw, 96px); }
+.pains ul { list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); border-top: 1px solid var(--line); }
+.pains li { padding: 22px 20px 22px 0; border-bottom: 1px solid var(--line); font-size: 1.05rem; min-width: 0; }
+
+/* Services band */
+.band { background: var(--bay); color: var(--bay-ink); padding-block: clamp(64px, 9vw, 112px); }
+.band .label { color: var(--bay-muted); }
+.band-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end; margin-bottom: 48px; }
+.band-head p { color: var(--bay-muted); max-width: 32em; }
+@media (max-width: 820px) { .band-head { grid-template-columns: 1fr; } }
+.services { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: color-mix(in srgb, var(--bay-ink) 18%, transparent); border: 1px solid color-mix(in srgb, var(--bay-ink) 18%, transparent); }
+.svc { background: var(--bay); padding: 28px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.svc p { color: var(--bay-muted); }
+.svc .price { margin-top: auto; padding-top: 12px; font-family: var(--mono); font-size: 0.9rem; color: var(--bay-ink); font-variant-numeric: tabular-nums; }
+.svc.start { background: color-mix(in srgb, var(--bay) 82%, #000); }
+.svc.start .tag { align-self: flex-start; background: var(--cherry); color: #fff; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; }
+
+/* Managed services */
+.managed { padding-block: clamp(64px, 9vw, 112px); }
+.managed-head { display: grid; gap: 16px; max-width: 46em; margin-bottom: 36px; }
+.managed-head p { color: var(--muted); }
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.95rem; }
+th, td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { font-family: var(--display); font-weight: 400; font-size: 1.3rem; }
+thead th .p { display: block; font-family: var(--mono); font-size: 0.85rem; color: var(--cherry); margin-top: 4px; font-variant-numeric: tabular-nums; }
+tbody th { font-weight: 500; color: var(--muted); width: 38%; }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+.note { margin-top: 16px; font-size: 0.92rem; color: var(--muted); }
+
+/* Process */
+.process { padding-block: 0 clamp(64px, 9vw, 112px); }
+.process ol { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 24px; counter-reset: step; }
+.process li { counter-increment: step; border-top: 2px solid var(--ink); padding-top: 14px; display: grid; gap: 6px; min-width: 0; }
+.process li::before { content: "Step " counter(step); font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cherry); }
+.process li strong { font-family: var(--display); font-weight: 400; font-size: 1.35rem; }
+.process li span { color: var(--muted); font-size: 0.95rem; }
+
+/* About */
+.about { padding-block: clamp(64px, 9vw, 112px); border-top: 1px solid var(--line); }
+.about .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); margin-top: 36px; }
+@media (max-width: 760px) { .about .grid { grid-template-columns: 1fr; } }
+.person { display: grid; gap: 12px; min-width: 0; }
+.person .role { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cherry); }
+.person p { color: var(--muted); }
+.placeholder { background: color-mix(in srgb, var(--focus) 22%, transparent); padding: 0 4px; border-radius: 3px; color: var(--ink); }
+.together { margin-top: 40px; max-width: 44em; font-size: 1.1rem; }
+
+/* FAQ */
+.faq { padding-block: 0 clamp(64px, 9vw, 112px); }
+.faq dl { margin: 32px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px 48px; }
+.faq dl > div { min-width: 0; }
+.faq dt { font-weight: 700; margin-bottom: 6px; }
+.faq dd { margin: 0; color: var(--muted); }
+
+/* Contact */
+.contact { background: var(--surface); border-top: 1px solid var(--line); padding-block: clamp(64px, 9vw, 112px); }
+.contact .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 72px); }
+@media (max-width: 820px) { .contact .grid { grid-template-columns: 1fr; } }
+.contact-info { display: grid; gap: 18px; align-content: start; min-width: 0; }
+.contact-info p { color: var(--muted); }
+.contact-info dl { display: grid; gap: 12px; margin: 8px 0 0; }
+.contact-info dt { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.contact-info dd { margin: 0; font-weight: 600; }
+.booking { display: grid; gap: 10px; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
+.booking p { font-size: 0.95rem; }
+.form-col { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.form-col h3 { font-size: 1.6rem; }
+form { display: grid; gap: 16px; min-width: 0; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 560px) { .row2 { grid-template-columns: 1fr; } }
+label { display: grid; gap: 6px; font-size: 0.9rem; font-weight: 600; min-width: 0; }
+input, select, textarea { font: inherit; font-weight: 400; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 11px 12px; width: 100%; }
+textarea { min-height: 110px; resize: vertical; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-msg { font-size: 0.95rem; color: var(--ok); font-weight: 600; }
+.form-msg.err { color: var(--cherry); }
+
+footer { padding-block: 28px; border-top: 1px solid var(--line); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 0.85rem; color: var(--muted); }
+/* Ways to start */
+.ways { padding-block: 0 clamp(56px, 8vw, 96px); }
+.paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 28px; }
+.path { display: grid; gap: 10px; align-content: start; padding: 24px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); min-width: 0; }
+.path .who { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cherry); }
+.path p { color: var(--muted); }
+.path a { font-weight: 600; color: var(--ink); }
+
+/* Step cards */
+.svc dl { display: grid; gap: 8px; margin: 4px 0 0; font-size: 0.92rem; }
+.svc dt { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bay-muted); }
+.svc dd { margin: 0; color: var(--bay-ink); }
+.svc .num { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bay-muted); }
+.extras { margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px 40px; color: var(--bay-muted); }
+.extras strong { color: var(--bay-ink); }
+
+/* Section heads */
+.sec { padding-block: clamp(64px, 9vw, 112px); }
+.sec + .sec { padding-top: 0; }
+.sec-head { display: grid; gap: 14px; max-width: 46em; margin-bottom: 32px; }
+.sec-head p { color: var(--muted); }
+
+/* Before / after */
+.ba td:nth-child(2) { color: var(--muted); }
+.ba td:nth-child(3) { font-weight: 600; }
+.tag-ex { display: inline-block; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; }
+
+/* Lists in two columns */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px 48px; }
+.cols > div { min-width: 0; display: grid; gap: 12px; align-content: start; }
+.ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ticks li { padding-left: 26px; position: relative; }
+.ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--bay); font-weight: 700; }
+.ticks.no li::before { content: "×"; color: var(--cherry); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ticks li::before { color: var(--bay-muted); } }
+:root[data-theme="dark"] .ticks li::before { color: var(--bay-muted); }
+.ticks.no li::before { color: var(--cherry) !important; }
+
+/* Industries */
+.inds { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); border-top: 1px solid var(--line); }
+.inds li { padding: 20px 20px 20px 0; border-bottom: 1px solid var(--line); display: grid; gap: 4px; min-width: 0; }
+.inds strong { font-family: var(--display); font-weight: 400; font-size: 1.3rem; }
+.inds span { color: var(--muted); font-size: 0.95rem; }
+.season { margin-top: 24px; padding: 18px 20px; border-left: 3px solid var(--cherry); background: var(--surface); max-width: 46em; }
+
+.data { background: var(--surface); border-block: 1px solid var(--line); }
+#how .services { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1000px) { #how .services { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { #how .services { grid-template-columns: 1fr; } }
+
+/* ---- Redesign layer ---- */
+h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -0.025em; }
+h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 1.02; }
+h1 em { font-style: normal; background: linear-gradient(90deg, var(--blue), var(--cherry)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+h3 { font-weight: 700; letter-spacing: -0.015em; }
+.label { color: var(--blue); font-weight: 500; }
+.btn { border-radius: 12px; transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.btn-primary { color: #fff; box-shadow: 0 8px 24px -10px var(--cherry); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-primary { color: #04231a; } }
+:root[data-theme="dark"] .btn-primary { color: #04231a; }
+.btn-primary:hover { transform: translateY(-1px); filter: none; box-shadow: 0 12px 28px -10px var(--cherry); }
+.btn-ghost { border-color: var(--line); background: var(--surface); }
+.btn-ghost:hover { border-color: var(--blue); }
+.brand { font-family: var(--display); font-weight: 800; letter-spacing: -0.02em; }
+.brand span { color: var(--blue); }
+header.site { background: color-mix(in srgb, var(--bg) 80%, transparent); }
+
+.hero { position: relative; overflow: hidden; background:
+  radial-gradient(50% 60% at 85% 10%, var(--glow-a), transparent 70%),
+  radial-gradient(40% 50% at 10% 90%, var(--glow-b), transparent 70%); }
+.hero .wrap { align-items: center; }
+.portrait { position: relative; min-width: 0; }
+.portrait .photo { aspect-ratio: 4 / 5; max-width: 100%; border-radius: 24px; border: 1px solid var(--line);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--blue) 22%, var(--surface)), color-mix(in srgb, var(--cherry) 22%, var(--surface)));
+  display: grid; place-items: center; text-align: center; padding: 24px; color: var(--muted); font-family: var(--mono); font-size: 0.8rem; }
+.portrait .art { padding: 8px; }
+.portrait .art svg { width: 100%; height: 100%; }
+.chip { position: absolute; display: grid; gap: 2px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; box-shadow: 0 18px 40px -20px rgba(11, 37, 51, .35); font-size: 0.85rem; color: var(--muted); max-width: 240px; }
+.chip strong { color: var(--ink); font-family: var(--display); font-size: 1rem; }
+.chip-a { left: -40px; bottom: 16%; }
+.chip-b { right: -16px; top: -22px; }
+.chip-c { right: 8%; bottom: -18px; }
+@media (max-width: 820px) { .portrait { max-width: 420px; } .chip-a { left: 0; } .chip-b { right: 0; } }
+.hero-note { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.92rem; color: var(--muted); }
+.hero-note span::before { content: "✓ "; color: var(--cherry); font-weight: 700; }
+
+.tools { border-block: 1px solid var(--line); background: var(--surface); padding-block: 18px; overflow: hidden; }
+.tools .wrap { display: flex; align-items: center; gap: 24px; }
+.tools .label { flex: none; color: var(--muted); }
+.marquee { overflow: hidden; flex: 1; min-width: 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee ul { display: flex; gap: 40px; width: max-content; list-style: none; margin: 0; padding: 0; animation: roll 40s linear infinite; font-family: var(--display); font-weight: 700; font-size: 1.05rem; color: var(--muted); white-space: nowrap; }
+@keyframes roll { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee ul { animation: none; flex-wrap: wrap; width: auto; } }
+@media (max-width: 640px) { .tools .wrap { flex-direction: column; align-items: flex-start; gap: 10px; } .marquee { width: 100%; } }
+
+.path { border-radius: 18px; box-shadow: 0 1px 0 var(--line); transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+.path:hover { transform: translateY(-3px); border-color: var(--blue); box-shadow: 0 18px 40px -24px rgba(11, 37, 51, .4); }
+.path .who { color: var(--cherry); }
+.path a { color: var(--blue); text-decoration: none; }
+.path a::after { content: " →"; }
+
+.band { background: linear-gradient(160deg, var(--bay), color-mix(in srgb, var(--bay) 70%, #0a5a52)); }
+.services { background: transparent; border: 0; gap: 16px; }
+.svc { border-radius: 18px; background: color-mix(in srgb, var(--bay-ink) 7%, transparent); border: 1px solid color-mix(in srgb, var(--bay-ink) 16%, transparent); }
+.svc.start { background: color-mix(in srgb, var(--bay-ink) 12%, transparent); border-color: color-mix(in srgb, var(--cherry) 70%, transparent); }
+.svc .num, .svc.start .tag + h3::before { }
+.svc .num { font-family: var(--display); font-size: 2.6rem; font-weight: 800; letter-spacing: -0.04em; text-transform: none; line-height: 1; color: color-mix(in srgb, var(--bay-ink) 40%, transparent); }
+.svc.start .tag { background: var(--cherry); }
+.svc .price { color: #8ff0cf; font-family: var(--mono); }
+
+.table-scroll { border-radius: 18px; }
+thead th { font-family: var(--display); font-weight: 800; letter-spacing: -0.02em; }
+thead th .p { color: var(--cherry); }
+.inds strong, .person h3, .process li strong { font-family: var(--display); font-weight: 700; }
+.inds li { transition: color .15s ease; }
+.season { border-left-color: var(--cherry); border-radius: 0 12px 12px 0; }
+.ticks li::before { color: var(--cherry) !important; }
+.ticks.no li::before { color: #c2414b !important; }
+.person .role { color: var(--blue); }
+.booking { border-radius: 14px; }
+input, select, textarea { border-radius: 10px; }
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--blue); outline-offset: 1px; border-color: transparent; }
+.contact { background: linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--glow-b) 60%, var(--surface))); }
+.form-msg.err { color: #c2414b; }
+.ways { padding-top: clamp(56px, 8vw, 96px); }
+header.site .btn { white-space: nowrap; }
+@media (max-width: 420px) { .brand { font-size: 1.1rem; } }
+</style>
+
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top">Door <span>AI</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#how">Services</a></li>
+        <li><a href="#prices">Care plans</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#about">About us</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="#contact">Free Check-Up</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-text">
+        <p class="label">Your door to practical AI · Based in Door County, Wisconsin</p>
+        <h1>Practical AI for <em>growing businesses.</em></h1>
+        <p class="lead">We find where AI can save your business real time, set it up inside the tools you already use, and keep it running. In person across Northeast Wisconsin, remote anywhere.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Book a free Check-Up</a>
+          <a class="btn btn-ghost" href="#how">See our services</a>
+        </div>
+        <p class="hero-note"><span>Fixed fees, no hourly billing</span><span>You own every account</span><span>Two AI experts, one team</span></p>
+      </div>
+      <div class="portrait">
+        <div class="photo art" aria-hidden="true">
+          <svg viewBox="30 60 340 420" preserveAspectRatio="xMidYMid meet" role="presentation">
+            <defs>
+              <linearGradient id="spill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--blue)" stop-opacity=".55"/><stop offset="1" stop-color="var(--cherry)" stop-opacity=".15"/></linearGradient>
+              <linearGradient id="inside" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--blue)" stop-opacity=".9"/><stop offset="1" stop-color="var(--cherry)" stop-opacity=".9"/></linearGradient>
+            </defs>
+            <polygon points="140,110 260,110 360,470 40,470" fill="url(#spill)"/>
+            <rect x="140" y="110" width="120" height="250" rx="4" fill="url(#inside)"/>
+            <g stroke="#fff" stroke-opacity=".85" stroke-width="2" fill="#fff">
+              <line x1="170" y1="160" x2="225" y2="190"/><line x1="225" y1="190" x2="185" y2="250"/><line x1="185" y1="250" x2="235" y2="300"/><line x1="225" y1="190" x2="235" y2="300"/>
+              <circle cx="170" cy="160" r="6"/><circle cx="225" cy="190" r="8"/><circle cx="185" cy="250" r="6"/><circle cx="235" cy="300" r="7"/>
+            </g>
+            <rect x="132" y="102" width="136" height="266" rx="6" fill="none" stroke="var(--ink)" stroke-width="6"/>
+            <polygon points="140,110 100,92 100,388 140,360" fill="var(--surface)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+            <circle cx="112" cy="245" r="5" fill="var(--ink)"/>
+          </svg>
+        </div>
+        <div class="chip chip-b"><strong>Free 1-hour Check-Up</strong>3 written ideas within 24 hours</div>
+        <div class="chip chip-a"><strong>Sam</strong>AI strategy and adoption, ex-Salesforce consultant</div>
+        <div class="chip chip-c"><strong>Joe</strong>AI engineer, builds and connects</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tools" aria-label="Tools we work with">
+    <div class="wrap">
+      <p class="label">Works with the tools you already use</p>
+      <div class="marquee">
+        <ul>
+          <li>Salesforce</li><li>HubSpot</li><li>QuickBooks</li><li>Microsoft 365</li><li>Google Workspace</li><li>Square</li><li>Shopify</li><li>Slack</li><li>ChatGPT</li><li>Claude</li><li>Gemini</li><li>Zapier</li>
+          <li aria-hidden="true">Salesforce</li><li aria-hidden="true">HubSpot</li><li aria-hidden="true">QuickBooks</li><li aria-hidden="true">Microsoft 365</li><li aria-hidden="true">Google Workspace</li><li aria-hidden="true">Square</li><li aria-hidden="true">Shopify</li><li aria-hidden="true">Slack</li><li aria-hidden="true">ChatGPT</li><li aria-hidden="true">Claude</li><li aria-hidden="true">Gemini</li><li aria-hidden="true">Zapier</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ways" aria-labelledby="start-h">
+    <div class="wrap">
+      <h2 id="start-h">Start wherever you are.</h2>
+      <div class="paths">
+        <div class="path">
+          <p class="who">Just curious</p>
+          <h3>Is AI worth it for us?</h3>
+          <p>Not sure AI fits a business like yours? Ask us. A short conversation costs nothing and we'll tell you honestly if it isn't worth it yet.</p>
+          <a href="#contact">Ask us a question</a>
+        </div>
+        <div class="path">
+          <p class="who">Exploring</p>
+          <h3>Free Business Check-Up</h3>
+          <p>One hour, in person in Northeast Wisconsin or by video anywhere. Within 24 hours you get a one-page summary with 3 ideas for your business.</p>
+          <a href="#contact">Book a free Check-Up</a>
+        </div>
+        <div class="path">
+          <p class="who">Ready to go</p>
+          <h3>Start with an AI Roadmap</h3>
+          <p>You already know AI can help. We map your business and hand you a plan with tools, workflows and expected hours saved.</p>
+          <a href="#contact">Book a Roadmap</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <div class="band-head">
+        <div>
+          <p class="label">Services</p>
+          <h2 id="how-h">Check-Up, Roadmap, Setup, Care.</h2>
+        </div>
+        <p>Four steps, each with a fixed fee agreed up front and something you keep. You can stop after any step, and you own everything we set up.</p>
+      </div>
+      <div class="services">
+        <article class="svc start">
+          <p class="num">01</p>
+          <span class="tag">Start here</span>
+          <h3>Business Check-Up</h3>
+          <p>A conversation about how work flows today and where AI could help.</p>
+          <dl>
+            <div><dt>Time</dt><dd>1 hour</dd></div>
+            <div><dt>You keep</dt><dd>A one-page summary with 3 ideas, within 24 hours</dd></div>
+          </dl>
+          <p class="price">Free</p>
+        </article>
+        <article class="svc">
+          <p class="num">02</p>
+          <h3>AI Roadmap</h3>
+          <p>We interview you and your key staff, map your business from first call to final invoice, and compare the AI tools that fit.</p>
+          <dl>
+            <div><dt>Time</dt><dd>1 to 3 weeks</dd></div>
+            <div><dt>You keep</dt><dd>A prioritized plan: which tools, which workflows, and the hours each will save</dd></div>
+          </dl>
+          <p class="price">Fixed fee, sized to your business<br>Credited toward a Setup within 60 days</p>
+        </article>
+        <article class="svc">
+          <p class="num">03</p>
+          <h3>Setup</h3>
+          <p>One workflow built and working inside the software you already use. Joe builds custom AI when nothing off the shelf fits.</p>
+          <dl>
+            <div><dt>Time</dt><dd>2 to 4 weeks</dd></div>
+            <div><dt>You keep</dt><dd>The working workflow, a how-to guide for staff, and a list of every account and login, all in your name</dd></div>
+          </dl>
+          <p class="price">Fixed quote per workflow<br>Includes 3 months of Care</p>
+        </article>
+        <article class="svc">
+          <p class="num">04</p>
+          <h3>Care</h3>
+          <p>We look after what we built, so it keeps working while AI tools change around it.</p>
+          <dl>
+            <div><dt>Time</dt><dd>Month to month</dd></div>
+            <div><dt>You get</dt><dd>Monitoring, fixes, monthly changes and a quarterly review</dd></div>
+          </dl>
+          <p class="price">Flat monthly plan</p>
+        </article>
+      </div>
+      <div class="extras">
+        <p><strong>Team workshops.</strong> Hands-on AI training built around your staff's own work.</p>
+        <p><strong>Industry kits, coming soon.</strong> A ready-made setup for lodging or property management, installed quickly for a flat monthly fee.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="managed" id="prices" aria-labelledby="prices-h">
+    <div class="wrap">
+      <div class="managed-head">
+        <p class="label">Care plans</p>
+        <h2 id="prices-h">We keep it running after we set it up.</h2>
+        <p>Every Setup includes the first 3 months of Care. After that, a flat monthly plan keeps your AI tools working and up to date. We'll recommend the right plan at your Roadmap.</p>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col"><span class="label">Care plans</span></th>
+              <th scope="col">Care Basic<span class="p">For small teams</span></th>
+              <th scope="col">Care Plus<span class="p">For growing teams</span></th>
+              <th scope="col">Fractional AI Lead<span class="p">For 50+ staff</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Monitoring of your AI tools and automations, with fixes when something breaks</th><td>Included</td><td>Included</td><td>Included</td></tr>
+            <tr><th scope="row">Changes or small improvements each month</th><td>1</td><td>3</td><td>Ongoing AI program: new uses, builds and rollout</td></tr>
+            <tr><th scope="row">Working session with the owner or team</th><td>Quarterly review</td><td>Monthly</td><td>Regular sessions with leadership and staff</td></tr>
+            <tr><th scope="row">User adds and removals, updates and license tracking</th><td>Included</td><td>Included</td><td>Included</td></tr>
+            <tr><th scope="row">Your AI roadmap, vendor choices and staff training, run for you</th><td>Not included</td><td>Not included</td><td>Included</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Month to month, cancel with 30 days notice. Setups are 50% upfront and 50% on completion. You pay software vendors directly.</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="ba-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Before and after</p>
+        <h2 id="ba-h">What this looks like on a Tuesday.</h2>
+        <p><span class="tag-ex">Examples</span> These show the kind of work we set up. We'll replace them with real client numbers as our first projects finish.</p>
+      </div>
+      <div class="table-scroll ba">
+        <table>
+          <thead><tr><th scope="col"><span class="label">Workflow</span></th><th scope="col"><span class="label">Before</span></th><th scope="col"><span class="label">After</span></th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Guest inquiry at 11 pm, vacation rental</th><td>Answered the next morning, guest has booked elsewhere</td><td>Answered in a minute with real availability, flagged for you if it needs a person</td></tr>
+            <tr><th scope="row">Tenant maintenance request</th><td>Voicemail, sticky note, a call back, then a text to the right contractor</td><td>Logged, sorted by urgency and sent to the right contractor automatically</td></tr>
+            <tr><th scope="row">Contractor quote after a site visit</th><td>An evening at the kitchen table, about 45 minutes per quote</td><td>Drafted from your notes and photos in a few minutes, ready for you to check</td></tr>
+            <tr><th scope="row">Weekly numbers for the owner</th><td>Copying from three systems into a spreadsheet every Monday</td><td>A summary lands in your inbox Monday at 7 am</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="keep-h">
+    <div class="wrap cols">
+      <div>
+        <p class="label">What you keep</p>
+        <h2 id="keep-h">It's all yours.</h2>
+        <p class="note">If we part ways, nothing goes with us.</p>
+      </div>
+      <div>
+        <ul class="ticks">
+          <li>Your Check-Up summary and AI Roadmap, in writing</li>
+          <li>Every AI tool and software account, set up in your name</li>
+          <li>A plain-language how-to guide for each workflow</li>
+          <li>A list of every account, login and monthly cost</li>
+          <li>Training for your staff, so they can run it day to day</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="industries" aria-labelledby="ind-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Industries we know</p>
+        <h2 id="ind-h">Industries we know, wherever they are.</h2>
+      </div>
+      <ul class="inds">
+        <li><strong>Lodging and vacation rentals</strong><span>Guest messages, bookings, reviews and turnover schedules</span></li>
+        <li><strong>Property management</strong><span>Tenant requests, owner reports, leases and renewals</span></li>
+        <li><strong>Trades and contractors</strong><span>Quotes, scheduling, job notes and invoices</span></li>
+        <li><strong>Event venues and wineries</strong><span>Inquiries, event planning, staffing and follow-ups</span></li>
+        <li><strong>Growing firms</strong><span>50 to 500 staff, ready for an AI program</span></li>
+      </ul>
+      <p class="season" id="season"><strong>Our seasonal tip:</strong> the best time to set up AI is the off-season. Put it in place over the winter and it's already answering guests and booking jobs when summer hits.</p>
+    </div>
+  </section>
+
+  <section class="sec data" id="where" aria-labelledby="where-h">
+    <div class="wrap cols">
+      <div>
+        <p class="label">Where we work</p>
+        <h2 id="where-h">Rooted in Door County. Working anywhere.</h2>
+      </div>
+      <div class="inds-wrap">
+        <ul class="ticks">
+          <li><strong>In Northeast Wisconsin, we're your local AI experts.</strong> We meet you in person in Door County, Green Bay, the Fox Valley, Manitowoc and Sheboygan.</li>
+          <li><strong>Everywhere else, we work by video.</strong> Same steps, same fixed fees, same team.</li>
+          <li><strong>Door County is where we prove it first.</strong> Our first projects are here, with neighbors we can check in on.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about" aria-labelledby="about-h">
+    <div class="wrap">
+      <p class="label">About us</p>
+      <h2 id="about-h">Meet Joe and Sam.</h2>
+      <div class="grid">
+        <div class="person">
+          <p class="role">AI strategy and adoption</p>
+          <h3>Sam</h3>
+          <p>Sam spent <span class="placeholder">[X] years</span> as a Salesforce consultant, helping companies in <span class="placeholder">[industries]</span> gather requirements and map their business end to end. Today Sam works hands-on with AI every day, finding where it fits in a business, choosing the right tools and helping teams actually use them.</p>
+        </div>
+        <div class="person">
+          <p class="role">AI engineering</p>
+          <h3>Joe</h3>
+          <p>Joe is an AI engineer who builds the automations, integrations and custom AI tools that make the plan real. <span class="placeholder">[Add Joe's background and a few things he has built.]</span></p>
+        </div>
+      </div>
+      <p class="together">We're a husband and wife team living in Sturgeon Bay. We both work with AI every day. Sam knows how businesses run and Joe knows how to build, so you get the strategy and the build from one team. We built this website ourselves, with AI.</p>
+    </div>
+  </section>
+
+  <section class="about" aria-labelledby="fit-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Is this a fit?</p>
+        <h2 id="fit-h">We'll tell you if we're not right for you.</h2>
+        <p>AI isn't the answer for everything. If it isn't for you yet, we'll say so at the Check-Up.</p>
+      </div>
+      <div class="cols">
+        <div>
+          <h3>A good fit</h3>
+          <ul class="ticks">
+            <li>5 to 49 staff, or a growing firm up to 500</li>
+            <li>Too much time lost to emails, quotes, scheduling and paperwork</li>
+            <li>Willing to try a new way of working</li>
+            <li>Someone on your team who can own the change</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Not a fit</h3>
+          <ul class="ticks no">
+            <li>You want a brand-new AI product built from scratch to sell</li>
+            <li>No one has time to own the change after we leave</li>
+            <li>You're looking for computer, network or phone support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec data" aria-labelledby="data-h">
+    <div class="wrap cols">
+      <div>
+        <p class="label">Your data</p>
+        <h2 id="data-h">Your information stays yours.</h2>
+      </div>
+      <div>
+        <ul class="ticks">
+          <li>You own every account and tool. Vendors bill you directly.</li>
+          <li>We choose AI tools that don't train on your data, and we set them up that way.</li>
+          <li>We only access what a workflow needs, and you can remove our access any time.</li>
+          <li>Your staff learn what never to paste into an AI tool.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq sec" aria-labelledby="faq-h">
+    <div class="wrap">
+      <h2 id="faq-h">Questions we hear</h2>
+      <dl>
+        <div><dt>What does it cost?</dt><dd>The Check-Up is free. After that, every step has a fixed fee we agree on before we start, sized to your business, with no hourly billing. The Roadmap fee is credited toward your Setup.</dd></div>
+        <div><dt>How much of my time does it take?</dt><dd>About an hour for the Check-Up, a few hours of interviews for the Roadmap, and short check-ins during a Setup. We do the rest.</dd></div>
+        <div><dt>What if it doesn't work?</dt><dd>We test every workflow with your team before we call it done, and Care covers fixes after that. If a Roadmap shows AI won't pay off, we'll tell you plainly.</dd></div>
+        <div><dt>In person or remote?</dt><dd>Both. We come to you anywhere in Northeast Wisconsin, and we work by video with businesses anywhere in the US.</dd></div>
+        <div><dt>The UW and the Chamber offer free AI classes. How are you different?</dt><dd>Those are a great start. Classes teach the ideas; we do the setup inside your business and keep it running afterward.</dd></div>
+        <div><dt>Do we need to be tech-savvy?</dt><dd>No. We pick tools your team can actually use, then train them.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-h">
+    <div class="wrap grid">
+      <div class="contact-info">
+        <p class="label">Contact</p>
+        <h2 id="contact-h">Book your free Check-Up.</h2>
+        <p>Book a free 1 hour Business Check-Up. We'll come to you anywhere in Northeast Wisconsin, or meet by video wherever you are. Within 24 hours, we'll send you a written summary with 3 specific ideas for your business.</p>
+        <p><strong>Founding client offer:</strong> our first 3 AI Roadmaps are free or discounted in exchange for a testimonial and two introductions.</p>
+        <div class="booking">
+          <p class="label">Pick a time yourself</p>
+          <p>See our open times and book your check-up in under a minute.</p>
+          <div><a class="btn btn-ghost btn-sm" id="booking-link" href="https://calendly.com/" target="_blank" rel="noopener">Open our calendar</a></div>
+          <p class="note"><span class="placeholder">[Calendly link goes here]</span></p>
+        </div>
+        <dl>
+          <div><dt>Phone</dt><dd><span class="placeholder">[(920) 000-0000]</span></dd></div>
+          <div><dt>Email</dt><dd><span class="placeholder">[hello@doorconsulting.ai]</span></dd></div>
+          <div><dt>Based in</dt><dd>Sturgeon Bay, Wisconsin</dd></div>
+        </dl>
+      </div>
+      <div class="form-col">
+        <h3>Or tell us about your business</h3>
+        <p class="label">We reply within one business day</p>
+        <form id="checkup-form" name="checkup" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="checkup">
+          <p class="hp"><label for="f-bot">Leave this empty<input id="f-bot" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+          <div class="row2">
+            <label for="f-name">Your name<input id="f-name" name="name" autocomplete="name" required></label>
+            <label for="f-biz">Business name<input id="f-biz" name="business" autocomplete="organization" required></label>
+          </div>
+          <div class="row2">
+            <label for="f-email">Email<input id="f-email" name="email" type="email" autocomplete="email" required></label>
+            <label for="f-phone">Phone<input id="f-phone" name="phone" type="tel" autocomplete="tel"></label>
+          </div>
+          <label for="f-size">Number of employees
+            <select id="f-size" name="size">
+              <option>1 to 5</option><option>6 to 15</option><option>16 to 50</option><option>51 to 100</option><option>More than 100</option>
+            </select>
+          </label>
+          <label for="f-tools">Which tools do you use today?<input id="f-tools" name="tools" placeholder="For example QuickBooks, Square, Excel, Salesforce"></label>
+          <label for="f-pain">What task would you most like AI to take off your plate?<textarea id="f-pain" name="pain"></textarea></label>
+          <div><button class="btn btn-primary" id="f-submit" type="submit">Request my free check-up</button></div>
+          <p class="form-msg" id="form-msg" role="status" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Door AI Consulting LLC · Sturgeon Bay, Wisconsin</span>
+    <span>Your door to practical AI · doorconsulting.ai</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var form = document.getElementById('checkup-form');
+    var msg = document.getElementById('form-msg');
+    var btn = document.getElementById('f-submit');
+    function show(text, isError) {
+      msg.textContent = text;
+      msg.className = 'form-msg' + (isError ? ' err' : '');
+      msg.hidden = false;
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('f-name').value.trim();
+      var email = document.getElementById('f-email').value.trim();
+      var biz = document.getElementById('f-biz').value.trim();
+      if (!name || !biz || !email || email.indexOf('@') < 1) {
+        show('Please add your name, business name and a valid email.', true);
+        return;
+      }
+      btn.disabled = true;
+      var body = new URLSearchParams(new FormData(form)).toString();
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })
+        .then(function (r) {
+          if (!r.ok) throw new Error('bad status');
+          form.reset();
+          show('Thanks, ' + name + '. We got your request and will be in touch within one business day.', false);
+        })
+        .catch(function () {
+          show('Sorry, that did not send. Please try again, or email us directly.', true);
+        })
+        .finally(function () { btn.disabled = false; });
+    });
+  })();
+</script>
+</body>
+</html>
